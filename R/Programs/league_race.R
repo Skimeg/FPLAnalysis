@@ -3,24 +3,25 @@ library(tidyverse)
 library(ggplot2)
 library(ggthemes)
 library(gganimate)
+library(gifski)
 
 `%notin%` <- Negate(`%in%`)
 
 #Set parameters 
 start_gw <- 1
 end_gw <- 38
-player_limit <- 10
+player_limit <- 16
 league_code <- 39075 #overall league
 
 #set animation paramaters
-fpgw <- 1 #frames per GW
-fps <- 1 #frames per second
-end_pause <- 150
+fpgw <- 10 #frames per GW
+fps <- 10 #frames per second 
+end_pause <- 100
 
 #set labels
 xlab <- "FPL Manager"
 ylab <- "Points"
-caption <- "Top 10 finishers"
+caption <- "League Position By Week"
 
 #Get league info#
 league <- fplscrapR::get_league(leagueid = league_code)
@@ -67,7 +68,7 @@ make_barchart_race <- function(title = "Title",
          x = xlab,
          y = ylab,
          caption = caption) +
-    ggthemes::theme_tufte(14,"Avenir") +
+    ggthemes::theme_tufte(14) +
     theme(aspect.ratio = 4/3,
           legend.position = "none",
           plot.title = element_text(hjust = -0.1, size = 22),
@@ -93,7 +94,7 @@ make_barchart_race(title = league$league$name,
                    end_pause = end_pause)
 
 #save to local directory
-gganimate::anim_save("overall.gif")
+gganimate::anim_save("league_2020.gif")
 
 
 
