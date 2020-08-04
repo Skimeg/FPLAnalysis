@@ -6,6 +6,10 @@
 # Load Packages
 install.packages("gsheet")
 install.packages("tidyverse")
+install.packages("directlabels")
+install.packages("formattable")
+install.packages("expss")
+install.packages("DT")
 library(gsheet)
 library(tidyverse)
 library(ggplot2)
@@ -33,6 +37,9 @@ input_data <- input_data %>%
 finishing_positions_wide <- input_data %>% 
   select(c("Manager",ends_with("Position"))) %>% 
   select(c("Manager",starts_with("Classic"))) 
+# Additional code to select just managers from the current season
+# finishing_positions_wide <- finishing_positions_wide %>% 
+#   filter(!is.na(`Classic League 19/20 Position`))
 # Transpose classic league finishes  
 finishing_positions_long <- finishing_positions_wide %>% 
   gather(key="Seasons",value="Position","Classic League 12/13 Position":rev(names(finishing_positions_wide))[1]) %>% 
@@ -73,7 +80,7 @@ finishing_points_long <- finishing_points_wide %>%
   mutate(Season = str_trim(substr(Seasons,15,20)))
 
 # Plot league points
-g_line_positions <- ggplot(finishing_points_long[!is.na(finishing_points_long$Points), ],
+g_line_points <- ggplot(finishing_points_long[!is.na(finishing_points_long$Points), ],
                            aes(x=Season, y=Points, group=Manager, color=Manager))+
   geom_line()+
   geom_point()+
@@ -87,7 +94,8 @@ g_box_points <- ggplot(finishing_points_long[!is.na(finishing_points_long$Points
   geom_boxplot()+
   theme(legend.position="none")+
   ggtitle("Classic FPL Points")+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  theme(axis.text.x=element_blank())+
   geom_text(data = p_meds, aes(Manager, MD, label = Manager), 
             position = position_dodge(width = 0.8), size = 2.5, vjust = -0.5)
 
@@ -200,7 +208,7 @@ champions_points_long <- champions_points_wide %>%
   mutate(Season = str_trim(substr(Seasons,18,23),side=c("both")))
 
 # Plot league points
-g_line_clpositions <- ggplot(champions_points_long[!is.na(champions_points_long$CLPoints), ],
+g_line_clpoints <- ggplot(champions_points_long[!is.na(champions_points_long$CLPoints), ],
                              aes(x=Season, y=CLPoints, group=Manager, color=Manager))+
   geom_line()+
   geom_point()+

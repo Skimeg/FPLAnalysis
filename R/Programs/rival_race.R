@@ -8,6 +8,7 @@ library(gganimate)
 
 my_id <- 20683     #Ben Byrne
 rival_id <- 19490  #Mike Hall
+#rival_id <- 55781 #Hiren Naygandhi
 
 
 #pull data for self and rival

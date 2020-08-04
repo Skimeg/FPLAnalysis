@@ -13,4 +13,5 @@ install.packages("tidyverse")
 install.packages("RColorBrewer")
 install.packages("animation")
 install.packages("extrafont")
+install.packages("gsheet")
 
