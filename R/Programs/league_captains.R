@@ -4,7 +4,7 @@ library(fplscrapR)
 library(tidyverse)
 library(ggplot2)
 
-league_code <- 39075 #overall league
+league_code <- 39075 #overall league #(BP 10265)
 my_id <- 20683     #Ben Byrne
 rival_id <- 19490  #Mike Hall
 #Get league info#
