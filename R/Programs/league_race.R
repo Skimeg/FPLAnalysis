@@ -11,10 +11,10 @@ library(gifski)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 16
-league_code <- 39075 #overall league
+league_code <- 144278 #overall league
 
 #set animation paramaters
-fpgw <- 10 #frames per GW
+fpgw <- 9 #frames per GW
 fps <- 10 #frames per second 
 end_pause <- 100
 
@@ -39,9 +39,7 @@ df_ml <- df$entry %>%
 
 #Only select the columns we need and renumber the gameweek numbers which got messed up by the pandemic.
 df_ml <- df_ml %>% 
-  dplyr::select(name, event, points, total_points, overall_rank) %>%
-  dplyr::filter(event %notin% seq(30,38)) %>%
-  dplyr::mutate(event = as.integer(ifelse(event > 38, event -9 ,event)))
+  dplyr::select(name, event, points, total_points, overall_rank)
 
 #Create variable to deal with ordering
 df_ml<-df_ml %>%
@@ -94,7 +92,7 @@ make_barchart_race(title = league$league$name,
                    end_pause = end_pause)
 
 #save to local directory
-gganimate::anim_save("league_2020.gif")
+gganimate::anim_save("league_2021.gif")
 
 
 
