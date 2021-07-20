@@ -19,10 +19,21 @@ df_ml <- df$entry %>%
   purrr::map_dfr(~fplscrapR::get_entry_season(.x))
 
 #Renumber the gameweek numbers which got messed up by the pandemic.
-df_ml <- df_ml %>%
-  dplyr::filter(event %notin% seq(30,38)) %>%
-  dplyr::mutate(event = as.integer(ifelse(event > 38, event -9 ,event)),
-                season = '19/20')
-write.csv(df_ml, "Roche_League_2021.csv")
-save(df_ml,file = 'Roche_League_2021.Rda')
+df_ml <- df_ml %>% dplyr::mutate(season = '21/22')
+write.csv(df_ml, "Roche_League_2022.csv")
+save(df_ml,file = 'Roche_League_2022.Rda')
+
+#########################MERGE WITH PREVIOUS SEASONS##########
+
+staging <- df_ml %>% 
+  rename(GW_Score=`GW Score`,
+         Total_Pts=`Total Pts`,
+         GW_Rank=`GW Rank`,
+         OVR_Rank=`Overall Rank`) %>% 
+  mutate(Gameweek=str_remove_all(Gameweek, "[GW]")) %>% 
+  select(Gameweek,Player, Manager, GW_Score, Total_Pts, GW_Rank, OVR_Rank)
+
+Roche_League_GW_History <- bind_rows(Roche_League_GW_History, staging)
+write.csv(Roche_League_GW_History, "Roche_League_GW_History.csv")
+save(Roche_League_GW_History,file = 'Roche_League_GW_History.Rda')
 

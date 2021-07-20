@@ -10,7 +10,7 @@ library(gifski)
 #Set parameters 
 start_gw <- 1
 end_gw <- 38
-player_limit <- 16
+player_limit <- 20
 league_code <- 144278 #overall league
 
 #set animation paramaters
@@ -92,7 +92,8 @@ make_barchart_race(title = league$league$name,
                    end_pause = end_pause)
 
 #save to local directory
-gganimate::anim_save("league_2021.gif")
+gganimate::anim_save("league_2022.gif")
+
 
 
 
