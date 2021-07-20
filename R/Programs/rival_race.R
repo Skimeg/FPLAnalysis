@@ -6,8 +6,8 @@ library(gganimate)
 
 `%notin%` <- Negate(`%in%`)
 
-my_id <- 20683     #Ben Byrne
-rival_id <- 19490  #Mike Hall
+my_id <- 26713     #Ben Byrne
+rival_id <- 327400  #Mike Hall
 #rival_id <- 55781 #Hiren Naygandhi
 
 
@@ -33,9 +33,7 @@ df_rival <- rival_season %>%
   dplyr::select(name, gameweek, points)
 
 df <- rbind(df_player, df_rival) %>% 
-  dplyr::mutate(name = factor(name)) %>%
-  dplyr::filter(gameweek %notin% seq(30,38)) %>%
-  dplyr::mutate(gameweek = as.integer(ifelse(gameweek > 38, gameweek -9 , gameweek)))
+  dplyr::mutate(name = factor(name))
 
 
 p <- ggplot(df,

@@ -6,10 +6,10 @@ library(gganimate)
 
 `%notin%` <- Negate(`%in%`)
 
-my_id <- 20683     #Ben Byrne
-rival_id <- 19490  #Mike Hall
-rival_id2 <- 55781 #Hiren Naygandhi
-rival_id3 <- 2199899 #Ryan Finch
+my_id <- 26713     #Ben Byrne
+rival_id <- 327400  #Mike Hall
+rival_id2 <- 2853886 #Hiren Naygandhi
+rival_id3 <- 824766 #Ryan Finch
 rival_id4 <- 68916 #James Penney
 rival_id5 <- 669110 #Ed Dunlop
 
@@ -129,7 +129,5 @@ make_barchart_race(title = "Title Race",
                    ylab = ylab, 
                    fps = fps, 
                    end_pause = end_pause)
-
-
 
 

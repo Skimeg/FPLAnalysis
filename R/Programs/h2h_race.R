@@ -12,7 +12,7 @@ library(gifski)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 4
-league_code <- 42747
+league_code <- 5794
 
 #set animation paramaters
 fpgw <- 5 #frames per GW

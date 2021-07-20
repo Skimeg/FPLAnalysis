@@ -6,7 +6,7 @@ library(tidyverse)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 16
-league_code <- 39075 #overall league
+league_code <- 144278 #overall league
 
 #Get league info#
 league <- fplscrapR::get_league(leagueid = league_code)
@@ -23,6 +23,6 @@ df_ml <- df_ml %>%
   dplyr::filter(event %notin% seq(30,38)) %>%
   dplyr::mutate(event = as.integer(ifelse(event > 38, event -9 ,event)),
                 season = '19/20')
-write.csv(df_ml, "Roche_League_2020.csv")
-save(df_ml,file = 'Roche_League_2020.Rda')
+write.csv(df_ml, "Roche_League_2021.csv")
+save(df_ml,file = 'Roche_League_2021.Rda')
 
