@@ -6,7 +6,7 @@ library(tidyverse)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 16
-league_code <- 144278 #overall league
+league_code <- 564206 #overall league
 
 #Get league info#
 league <- fplscrapR::get_league(leagueid = league_code)
@@ -26,11 +26,14 @@ save(df_ml,file = 'Roche_League_2022.Rda')
 #########################MERGE WITH PREVIOUS SEASONS##########
 
 staging <- df_ml %>% 
-  rename(GW_Score=`GW Score`,
-         Total_Pts=`Total Pts`,
-         GW_Rank=`GW Rank`,
-         OVR_Rank=`Overall Rank`) %>% 
-  mutate(Gameweek=str_remove_all(Gameweek, "[GW]")) %>% 
+  rename(GW_Score=points,
+         Total_Pts=total_points,
+         GW_Rank=rank,
+         OVR_Rank=overall_rank,
+         Gameweek=event,
+         Player=name) %>%
+  mutate(Manager=str_c(Player," ",season)) %>% 
+  mutate(Gameweek=as.character(Gameweek)) %>% 
   select(Gameweek,Player, Manager, GW_Score, Total_Pts, GW_Rank, OVR_Rank)
 
 Roche_League_GW_History <- bind_rows(Roche_League_GW_History, staging)

@@ -1,3 +1,14 @@
+get_league <- function(leagueid = NULL, leaguetype = "classic"){
+  if(is.null(leagueid)) stop("You'll need to input a league ID, mate.")
+  if(length(leagueid) != 1) stop("One league at a time, please.")
+  {
+    league <- jsonlite::fromJSON(paste("https://fantasy.premierleague.com/api/leagues-",leaguetype,"/",leagueid,"/standings/",sep=""))
+    return(league)
+  }
+}
+
+
+
 library(fplscrapR)
 library(tidyverse)
 library(ggplot2)
@@ -11,7 +22,7 @@ library(gifski)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 20
-league_code <- 144278 #overall league
+league_code <- 564206 #overall league
 
 #set animation paramaters
 fpgw <- 9 #frames per GW

@@ -1,3 +1,11 @@
+url <- "https://docs.google.com/spreadsheets/d/1QyUhnICs8utfDn-GKioxiBmoYpgfGcYIMmFpE1k8VOY/edit?usp=sharing"
+input_data <- gsheet2tbl(url, sheetid = "21/22_Auction")
+# Remove blank rows/columns
+input_data <- input_data %>% 
+  filter(!is.na(Manager)) %>% 
+  select(-starts_with("X"))
+
+
 library(fplscrapR)
 library(tidyverse)
 library(ggplot2)
@@ -11,25 +19,24 @@ library(gifski)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 20
-league_code <- 144278 #overall league
 
 #set animation paramaters
-fpgw <- 9 #frames per GW
+fpgw <- 7 #frames per GW
 fps <- 10 #frames per second 
-end_pause <- 100
+end_pause <- 70
 
 #set labels
 xlab <- "FPL Manager"
 ylab <- "Points"
 caption <- "League Position By Week"
 
-df_ml <- Roche_League_GW_History %>%
-  select(Manager, Gameweek, GW_Score, Total_Pts,OVR_Rank) %>% 
+df_ml <- input_data %>%
+  select(Manager, Gameweek, GW_Score, Total_Pts,Overall_Rank) %>% 
+  mutate(event = str_remove(Gameweek,"GW")) %>% 
   rename(name=Manager,
-         event=Gameweek,
          points=GW_Score,
          total_points=Total_Pts,
-         overall_rank=OVR_Rank) %>% 
+         overall_rank=Overall_Rank) %>% 
   mutate(event=as.numeric(event))
 
 #Create variable to deal with ordering
@@ -88,11 +95,11 @@ make_barchart_race <- function(title = "Title",
 }
 
 #Run function 
-make_barchart_race(title = "All Time Best Seasons", 
+make_barchart_race(title = "21/22 League", 
                    xlab = xlab, 
                    ylab = ylab, 
                    fps = fps, 
                    end_pause = end_pause)
 
 #save to local directory
-gganimate::anim_save("league_all_time_top_25.gif")
+gganimate::anim_save("111111.gif")
