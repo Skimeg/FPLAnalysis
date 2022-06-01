@@ -18,10 +18,10 @@ df<-league$standings$results
 df_ml <- df$entry %>% 
   purrr::map_dfr(~fplscrapR::get_entry_season(.x))
 
-#Renumber the gameweek numbers which got messed up by the pandemic.
-df_ml <- df_ml %>% dplyr::mutate(season = '21/22')
-write.csv(df_ml, "Roche_League_2022.csv")
-save(df_ml,file = 'Roche_League_2022.Rda')
+
+df_ml <- df_ml %>% dplyr::mutate(season = '22/23')
+write.csv(df_ml, "Roche_League_2023.csv")
+save(df_ml,file = 'Roche_League_2023.Rda')
 
 #########################MERGE WITH PREVIOUS SEASONS##########
 
