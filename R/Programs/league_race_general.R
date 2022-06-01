@@ -1,11 +1,3 @@
-url <- "https://docs.google.com/spreadsheets/d/1QyUhnICs8utfDn-GKioxiBmoYpgfGcYIMmFpE1k8VOY/edit?usp=sharing"
-input_data <- gsheet2tbl(url, sheetid = "21/22_Auction")
-# Remove blank rows/columns
-input_data <- input_data %>% 
-  filter(!is.na(Manager)) %>% 
-  select(-starts_with("X"))
-
-
 library(fplscrapR)
 library(tidyverse)
 library(ggplot2)
@@ -31,25 +23,23 @@ ylab <- "Points"
 caption <- "League Position By Week"
 
 df_ml <- input_data %>%
-  select(Manager, Gameweek, GW_Score, Total_Pts,Overall_Rank) %>% 
+  select(Manager, Gameweek, GW_Score, Total_Pts,OVR_Rank) %>% 
   mutate(event = str_remove(Gameweek,"GW")) %>% 
   rename(name=Manager,
          points=GW_Score,
          total_points=Total_Pts,
-         overall_rank=Overall_Rank) %>% 
+         overall_rank=OVR_Rank) %>% 
   mutate(event=as.numeric(event))
 
 #Create variable to deal with ordering
 df_ml <- df_ml %>%
-  dplyr::group_by(event) %>%
   dplyr::mutate(ordering = rank(total_points,ties.method= "first")) %>%
-  dplyr::ungroup() %>% 
   dplyr::group_by(name) %>% 
   dplyr::mutate(priority = max(ordering)) %>% 
   dplyr::ungroup() %>% 
   select(name, name, event, points, total_points, overall_rank,priority)
 
-min_output <- max(df_ml$priority) - 25  
+min_output <- max(df_ml$priority) - 40  
 df_ml <- df_ml %>% dplyr::filter(priority > min_output)
 
 df_ml <- df_ml %>%
@@ -95,11 +85,11 @@ make_barchart_race <- function(title = "Title",
 }
 
 #Run function 
-make_barchart_race(title = "21/22 League", 
+make_barchart_race(title = "All Time Best Seasons", 
                    xlab = xlab, 
                    ylab = ylab, 
                    fps = fps, 
                    end_pause = end_pause)
 
 #save to local directory
-gganimate::anim_save("111111.gif")
+gganimate::anim_save("league_all_time_top_pts.gif")
