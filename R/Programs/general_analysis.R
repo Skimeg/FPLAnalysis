@@ -29,6 +29,7 @@ input_data <- input_data %>%
   filter(!is.na(Manager)) %>% 
   select(-starts_with("X"))
 
+`%notin%` <- Negate(`%in%`)
 
 ####################################################
 ### PLot Graphics                                ###
@@ -43,7 +44,7 @@ finishing_positions_wide <- input_data %>%
 # Transpose classic league finishes  
 finishing_positions_long <- finishing_positions_wide %>% 
   gather(key="Seasons",value="Position","Classic League 12/13 Position":rev(names(finishing_positions_wide))[1]) %>% 
-  mutate(Season = str_trim(substr(Seasons,15,20)))
+  mutate(Season = str_trim(substr(Seasons,15,20))) 
 
 # Plot league finishes
 g_line_finishes <- ggplot(finishing_positions_long[!is.na(finishing_positions_long$Position), ],
@@ -52,7 +53,7 @@ g_line_finishes <- ggplot(finishing_positions_long[!is.na(finishing_positions_lo
   geom_point()+
   theme(legend.position="none")+
   ggtitle("Classic FPL Finishing Positions")+
-  scale_y_reverse(breaks=c(1, 3, 6, 10), minor_breaks=c(2,4,8))+
+  scale_y_reverse(breaks=c(1, 3, 6, 10), minor_breaks=c(2,4,5,7,8,9))+
   geom_dl(aes(label = Manager), method = list(dl.trans(x = x + 0.1), "last.points", cex = 0.8))
 
 
@@ -63,7 +64,7 @@ g_box_finishes <- ggplot(finishing_positions_long[!is.na(finishing_positions_lon
   geom_boxplot()+
   theme(legend.position="none")+
   ggtitle("Classic FPL Finishing Positions")+
-  scale_y_reverse(breaks=c(1, 3, 6, 10), minor_breaks=c(2,4,8))+
+  scale_y_reverse(breaks=c(1, 3, 6, 10), minor_breaks=c(2,4,5,7,8,9))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   geom_text(data = p_meds, aes(Manager, MD, label = Manager), 
             position = position_dodge(width = 0.8), size = 2.5, vjust = -0.5)
@@ -174,7 +175,8 @@ champions_positions_wide <- input_data %>%
 # Transpose champions league finishes  
 champions_positions_long <- champions_positions_wide %>% 
   gather(key="Seasons",value="CLPosition","Champions League 15/16 Position":rev(names(champions_positions_wide))[1]) %>% 
-  mutate(Season = str_trim(substr(Seasons,18,23)))
+  mutate(Season = str_trim(substr(Seasons,18,23))) %>% 
+  filter(Manager %notin% c("Median","Average"))
 
 # Plot champions league finishes
 g_line_clfinishes <- ggplot(champions_positions_long[!is.na(champions_positions_long$CLPosition), ],

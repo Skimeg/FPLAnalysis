@@ -22,7 +22,7 @@ library(gifski)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 20
-league_code <- 564206 #overall league
+league_code <- 583303 #overall league
 
 #set animation paramaters
 fpgw <- 9 #frames per GW
@@ -48,7 +48,7 @@ df<-df %>%
 df_ml <- df$entry %>% 
   purrr::map_dfr(~fplscrapR::get_entry_season(.x))
 
-#Only select the columns we need and renumber the gameweek numbers which got messed up by the pandemic.
+#Only select the columns we need
 df_ml <- df_ml %>% 
   dplyr::select(name, event, points, total_points, overall_rank)
 

@@ -8,7 +8,7 @@ league_code <- 564206 #overall league
 my_id <- 10757     #Ben Byrne
 rival_id <- 193986  #Mike Hall
 #Get league info#
-league <- fplscrapR::get_league(leagueid = league_code)
+league <- get_league(leagueid = league_code)
 #######################################################
 
 #Put key info into a data frame and set a limit on number of FPL players
