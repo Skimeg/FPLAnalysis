@@ -4,9 +4,7 @@ library(fplscrapR)
 library(tidyverse)
 library(ggplot2)
 
-league_code <- 564206 #overall league
-my_id <- 10757     #Ben Byrne
-rival_id <- 193986  #Mike Hall
+league_code <- 583303 #overall league
 #Get league info#
 league <- get_league(leagueid = league_code)
 #######################################################
@@ -41,6 +39,16 @@ captains15 <- fplscrapR:::get_entry_captain(df$entry[15],c(1:38))
 captains16 <- fplscrapR:::get_entry_captain(df$entry[16],c(1:38))
 captains17 <- fplscrapR:::get_entry_captain(df$entry[17],c(1:38))
 captains18 <- fplscrapR:::get_entry_captain(df$entry[18],c(1:38))
+captains19 <- fplscrapR:::get_entry_captain(df$entry[19],c(1:38))
+captains20 <- fplscrapR:::get_entry_captain(df$entry[20],c(1:38))
+captains21 <- fplscrapR:::get_entry_captain(df$entry[21],c(1:38))
+captains22 <- fplscrapR:::get_entry_captain(df$entry[22],c(1:38))
+captains23 <- fplscrapR:::get_entry_captain(df$entry[23],c(1:38))
+captains24 <- fplscrapR:::get_entry_captain(df$entry[24],c(1:38))
+captains25 <- fplscrapR:::get_entry_captain(df$entry[25],c(1:38))
+captains26 <- fplscrapR:::get_entry_captain(df$entry[26],c(1:38))
+captains27 <- fplscrapR:::get_entry_captain(df$entry[27],c(1:38))
+
 
 df_captains <- rbind(captains1, captains2,
                      captains3, captains4,
@@ -50,7 +58,12 @@ df_captains <- rbind(captains1, captains2,
                      captains11,captains12,
                      captains13,captains14,
                      captains15,captains16,
-                     captains17,captains18
+                     captains17,captains18,
+                     captains19,captains20,
+                     captains21,captains22,
+                     captains23,captains24,
+                     captains25,captains26,
+                     captains27
                      )
 df_cpt_sum <- df_captains %>%
   group_by(playername) %>%

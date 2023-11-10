@@ -96,14 +96,18 @@ make_barchart_race <- function(title = "Title",
 }
 
 #Run function
-make_barchart_race(title = league$league$name, 
+plot1 <- make_barchart_race(title = league$league$name, 
                    xlab = xlab, 
                    ylab = ylab, 
                    fps = fps, 
                    end_pause = end_pause)
+animate(plot1, 200, fps = 20,  width = 1200, height = 1000, 
+        renderer = gifski_renderer("league_2023.gif"))
+
+
 
 #save to local directory
-gganimate::anim_save("league_2022.gif")
+gganimate::anim_save("league_2023.gif")
 
 
 
