@@ -4,7 +4,7 @@ library(fplscrapR)
 library(tidyverse)
 library(ggplot2)
 
-league_code <- 583303 #overall league
+league_code <- 7317 #overall league
 #Get league info#
 league <- get_league(leagueid = league_code)
 #######################################################
@@ -43,11 +43,6 @@ captains19 <- fplscrapR:::get_entry_captain(df$entry[19],c(1:38))
 captains20 <- fplscrapR:::get_entry_captain(df$entry[20],c(1:38))
 captains21 <- fplscrapR:::get_entry_captain(df$entry[21],c(1:38))
 captains22 <- fplscrapR:::get_entry_captain(df$entry[22],c(1:38))
-captains23 <- fplscrapR:::get_entry_captain(df$entry[23],c(1:38))
-captains24 <- fplscrapR:::get_entry_captain(df$entry[24],c(1:38))
-captains25 <- fplscrapR:::get_entry_captain(df$entry[25],c(1:38))
-captains26 <- fplscrapR:::get_entry_captain(df$entry[26],c(1:38))
-captains27 <- fplscrapR:::get_entry_captain(df$entry[27],c(1:38))
 
 
 df_captains <- rbind(captains1, captains2,
@@ -60,10 +55,7 @@ df_captains <- rbind(captains1, captains2,
                      captains15,captains16,
                      captains17,captains18,
                      captains19,captains20,
-                     captains21,captains22,
-                     captains23,captains24,
-                     captains25,captains26,
-                     captains27
+                     captains21,captains22
                      )
 df_cpt_sum <- df_captains %>%
   group_by(playername) %>%
@@ -94,8 +86,8 @@ print(p)
 Captains_sum <- table(df_captains$playername)
 View(Captains_sum)
 
-write.csv(Captains_sum, "Roche_League_Captains_2023.csv")
-save(Captains_sum,file = 'Roche_League_Captains_2023.Rda')
+write.csv(Captains_sum, "Roche_League_Captains_2024.csv")
+save(Captains_sum,file = 'Roche_League_Captains_2024.Rda')
 
 
 

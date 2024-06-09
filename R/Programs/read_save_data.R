@@ -6,7 +6,7 @@ library(tidyverse)
 start_gw <- 1
 end_gw <- 38
 player_limit <- 20
-league_code <- 583303 #overall league
+league_code <- 7317 #overall league
 
 #Get league info#
 league <- fplscrapR::get_league(leagueid = league_code)
@@ -19,9 +19,9 @@ df_ml <- df$entry %>%
   purrr::map_dfr(~fplscrapR::get_entry_season(.x))
 
 
-df_ml <- df_ml %>% dplyr::mutate(season = '23/24')
-write.csv(df_ml, "Roche_League_2024.csv")
-save(df_ml,file = 'Roche_League_2024.Rda')
+df_ml <- df_ml %>% dplyr::mutate(season = '24/25')
+write.csv(df_ml, "Roche_League_2025.csv")
+save(df_ml,file = 'Roche_League_2025.Rda')
 
 #########################MERGE WITH PREVIOUS SEASONS##########
 
